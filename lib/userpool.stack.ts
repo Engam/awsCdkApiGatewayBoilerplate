@@ -1,0 +1,45 @@
+
+import * as cdk from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+
+import * as cognito from 'aws-cdk-lib/aws-cognito';
+import { IUserPoolStackProps } from '../interfaces/stack/userpool-stack.interface';
+
+export class UserpoolStack extends cdk.Stack {
+  public readonly pool: cognito.UserPool;
+  
+  constructor(scope: Construct, id: string, props: IUserPoolStackProps) {
+    super(scope, id, props);
+
+    const pool = new cognito.UserPool(this, props.appName + '-userpool', {
+      selfSignUpEnabled: false,
+      autoVerify: {
+        email: true,
+        phone:true,
+      },
+      accountRecovery: cognito.AccountRecovery.NONE,
+      signInAliases: {
+        username: true
+      },
+
+      advancedSecurityMode: cognito.AdvancedSecurityMode.ENFORCED,
+      mfa: cognito.Mfa.OFF,
+    });
+
+    pool.addClient(props.appName + '-userpoolClient', {
+      accessTokenValidity: cdk.Duration.minutes(5),
+      refreshTokenValidity: cdk.Duration.hours(1),
+      idTokenValidity: cdk.Duration.minutes(5),
+      authFlows: {
+        userPassword: true,
+        adminUserPassword: false,
+        custom: false,
+        userSrp: false
+      }
+    });
+
+    this.pool = pool;
+
+  }
+  
+}
