@@ -1,14 +1,22 @@
-# Welcome to your CDK TypeScript project
+# AWS CDK - API GATEWAY BOILERPLATE
+(early version)
+This app can be used as a boilerplate to create a REST API with aws cdk, with lambda integration, and cognito userpool authorization
 
-This is a blank project for CDK development with TypeScript.
+## Prerequisites
+- AWS Account
+- AWS CDK CLI
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Configuration
+Update config.json to match your environment
 
-## Useful commands
+## Creating apis
+This is an early simple version. Create an 
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+## Creating an api
+Create lambdafunction in lib/lambda.stack.ts
+Create methods in lib/api.stack.ts
+
+## TODO (some not all)
+- missing request validation and response body mapping
+- might add api key authorization as well
+- might add custom auth autorization (not cognito userpool)
