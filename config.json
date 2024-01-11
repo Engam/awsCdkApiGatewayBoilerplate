@@ -1,14 +1,14 @@
 {
   "DB": {
-    "ENV": "-232132eask2ns-test",
+    "ENV": "ENV SPECIFIC",
     "tables": {
-      "USER": "user"
+      "USER": "TABLE NAME"
     }
   },
   "AWS":{
-    "REGION": "eu-central-1"
+    "REGION": "REGION"
   },
   "APP": {
-    "name": "user"
+    "name": "NAME OF APP"
   }
 }
