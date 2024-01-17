@@ -11,8 +11,8 @@ import { LambdaStack } from '../lib/lambda.stack';
 import { WAFStack } from '../lib/waf.stack';
 const myConfig: IConfig = config as IConfig;
 
-const ACCOUNT  = myConfig.AWS.ACCOUNT_ID ??  process.env?.CDK_DEFAULT_ACCOUNT ?? undefined; //Build should fail if account id is not found
-const REGION = myConfig.AWS.REGION ?? process.env?.CDK_DEFAULT_REGION ?? 'eu-central-1'; //defaults to eu-central-1 (Frankfurt)
+const ACCOUNT  = myConfig?.AWS?.ACCOUNT_ID ??  process.env?.CDK_DEFAULT_ACCOUNT ?? undefined; //Build should fail if account id is not found
+const REGION = myConfig?.AWS?.REGION ?? process.env?.CDK_DEFAULT_REGION ?? 'eu-central-1'; //defaults to eu-central-1 (Frankfurt)
 
 const app = new cdk.App();
 
