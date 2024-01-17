@@ -8,7 +8,7 @@ export class LambdaStack extends cdk.Stack {
 
   constructor(scope: Construct, id: string, props: LambdaProps) {
     super(scope, id, props);
-    const getUserLambda = new lambda.Function(this, 'getUser', {
+    const getUserLambda = new lambda.Function(this, 'getUser -' + props.appName, {
       runtime: lambda.Runtime.NODEJS_LATEST,
       code: lambda.Code.fromAsset('lambda' + '/getUser'),
       timeout: cdk.Duration.seconds(10),

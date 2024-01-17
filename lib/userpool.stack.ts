@@ -4,6 +4,7 @@ import { Construct } from 'constructs';
 
 import * as cognito from 'aws-cdk-lib/aws-cognito';
 import { IUserPoolStackProps } from '../interfaces/stack/userpool-stack.interface';
+import * as wafv2 from 'aws-cdk-lib/aws-wafv2';
 
 export class UserpoolStack extends cdk.Stack {
   public readonly pool: cognito.UserPool;
@@ -37,6 +38,13 @@ export class UserpoolStack extends cdk.Stack {
         userSrp: false
       }
     });
+
+    const wafAssociation = new wafv2.CfnWebACLAssociation(this, props.appName + '-cognito-waf-association', {
+      resourceArn: pool.userPoolArn,
+      webAclArn: props.waf.attrArn
+    });
+
+
 
     this.pool = pool;
 

@@ -1,14 +1,14 @@
 {
   "DB": {
-    "ENV": "ENV SPECIFIC",
+    "ENV": "DB TABLES ENVIRONMENT NAME (MADE FOR TABLES GENERATED WITH AWS AMPLIFY)",
     "tables": {
-      "USER": "TABLE NAME"
+      "USER": "TABLE NAME FOR USERS (EXAMPLE)"
     }
   },
   "AWS":{
-    "REGION": "REGION"
+    "REGION": "AWS REGION"
   },
   "APP": {
-    "name": "NAME OF APP"
+    "name": "YOUR APP NAME"
   }
 }

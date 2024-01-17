@@ -8,7 +8,7 @@ export class DBStack extends cdk.Stack {
 
   constructor(scope: Construct, id: string, props: IDBStackProps) {
     super(scope, id, props);
-    const userTable = dynamodb.Table.fromTableName(this, props.db.usertable.tableName + props.db.ENV, props.appName + '-user');
+    const userTable = dynamodb.Table.fromTableName(this, props.appName +  props.db.usertable.tableName + props.db.ENV, props.db.usertable.tableName + props.db.ENV);
     this.userTable = userTable;
   }
 }

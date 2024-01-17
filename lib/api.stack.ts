@@ -2,6 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as apiGateway from 'aws-cdk-lib/aws-apigateway';
 import { APIProps } from '../interfaces/stack/api-stack.interface';
+import * as wafv2 from 'aws-cdk-lib/aws-wafv2';
 
 export class APIStack extends cdk.Stack {
 
@@ -11,12 +12,7 @@ export class APIStack extends cdk.Stack {
     const api = new apiGateway.RestApi(this, props.appName + '-api', {
       restApiName: props.appName + 'API',
       description: 'This service serves ' + props.appName + ' API.',
-      // apiKeySourceType: apiGateway.ApiKeySourceType.HEADER,
     });
-
-    // api.addApiKey(props.appName + '-api-key', {
-    //   apiKeyName: props.appName + '-api-key'
-    // });
 
     const userMethod = new apiGateway.LambdaIntegration(props.lambdas.getUserLambda);
 
@@ -29,7 +25,6 @@ export class APIStack extends cdk.Stack {
       providerArns: [props.userpool.userPoolArn],
       restApiId: api.restApiId,
     });
-
 
     const validator = new apiGateway.CfnRequestValidator(this, props.appName + '-api-validator', {
       name: 'getUser-validator',
@@ -53,6 +48,11 @@ export class APIStack extends cdk.Stack {
       // },
       authorizationType: apiGateway.AuthorizationType.COGNITO
     })
+
+    const wafAssociation = new wafv2.CfnWebACLAssociation(this, props.appName + '-api-waf-association', {
+      resourceArn: api.deploymentStage.stageArn,
+      webAclArn: props.waf.attrArn
+    });
 
   }
 }
