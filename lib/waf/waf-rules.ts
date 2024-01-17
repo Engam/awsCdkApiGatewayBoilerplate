@@ -18,7 +18,6 @@ export class WafRules implements WafRulesClass {
       this.genAWSManagedRulesAdminProtectionRuleSet(),
       this.genAWSManagedRulesAmazonIpReputationList(),
       this.genAWSManagedRulesAnonymousIpList(),
-      this.genAWSManagedRulesBotControlRuleSet(),
       this.genAWSManagedRulesCommonRuleSet(),
       this.genAWSManagedRulesKnownBadInputsRuleSet(),
       this.genAWSManagedRulesUnixRuleSet(),
@@ -225,34 +224,34 @@ export class WafRules implements WafRulesClass {
   }
 
 
-  private genAWSManagedRulesBotControlRuleSet():WafRule {
-    return {
-      Rule: {
-        name: "AWS-AWSManagedRulesBotControlRuleSet",
-        priority: 0,
-        statement: {
-          managedRuleGroupStatement: {
-            vendorName: "AWS",
-            name: "AWSManagedRulesBotControlRuleSet",
-            managedRuleGroupConfigs: [
-              {
-                awsManagedRulesBotControlRuleSet: {
-                  inspectionLevel: "COMMON"
-                }
-              }
-            ]
-          }
-        },
-        overrideAction: {
-          none: {}
-        },
-        visibilityConfig: {
-          sampledRequestsEnabled: true,
-          cloudWatchMetricsEnabled: true,
-          metricName: "AWS-AWSManagedRulesBotControlRuleSet"
-        }
-      }
-    }
-  }
+  // private genAWSManagedRulesBotControlRuleSet():WafRule {
+  //   return {
+  //     Rule: {
+  //       name: "AWS-AWSManagedRulesBotControlRuleSet",
+  //       priority: 0,
+  //       statement: {
+  //         managedRuleGroupStatement: {
+  //           vendorName: "AWS",
+  //           name: "AWSManagedRulesBotControlRuleSet",
+  //           managedRuleGroupConfigs: [
+  //             {
+  //               awsManagedRulesBotControlRuleSet: {
+  //                 inspectionLevel: "COMMON"
+  //               }
+  //             }
+  //           ]
+  //         }
+  //       },
+  //       overrideAction: {
+  //         none: {}
+  //       },
+  //       visibilityConfig: {
+  //         sampledRequestsEnabled: true,
+  //         cloudWatchMetricsEnabled: true,
+  //         metricName: "AWS-AWSManagedRulesBotControlRuleSet"
+  //       }
+  //     }
+  //   }
+  // }
 
 }
